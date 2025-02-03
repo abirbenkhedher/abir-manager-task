@@ -1,0 +1,186 @@
+/* --------------------- Styles généraux --------------------- */
+.container {
+  max-width: 90%;
+  margin: auto;
+}
+
+/* --------------------- Boutons et filtres en ligne --------------------- */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* --------------------- Table responsive --------------------- */
+p-table {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  th:nth-child(3), td:nth-child(3), 
+  th:nth-child(4), td:nth-child(4) {
+    width: 50px;  /* Réduit la largeur */
+  }
+}
+
+/* --------------------- Formulaire et Dialog --------------------- */
+
+/* Formulaire dans le Dialog */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Conteneur des champs d'entrée */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Conteneur pour la case à cocher et le texte "Terminée"/"En cours" */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-text {
+  font-weight: bold;
+  color: #333;
+}
+
+.status-text[ng-reflect-ng-if="true"] {
+  color: #2ecc71; /* Vert pour "Terminée" */
+}
+
+.status-text[ng-reflect-ng-if="false"] {
+  color: #e74c3c; /* Rouge pour "En cours" */
+}
+
+/* Bouton d'enregistrement */
+.submit-btn {
+  background-color: #4CAF50; /* Vert pour "Enregistrer" */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Personnalisation des Dialogs */
+p-dialog {
+  width: 80%; /* Largeur par défaut */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+p-dialog .ui-dialog-titlebar {
+  background-color: #007BFF; /* Bleu */
+  color: white;
+}
+
+p-dialog .ui-dialog-title {
+  font-size: 1.2rem;
+}
+
+p-dialog .ui-dialog-content {
+  padding: 10px;
+}
+
+/* --------------------- Boutons (Edit et Delete) --------------------- */
+.edit-btn, .delete-btn {
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 5px;
+  width: 120px;
+}
+
+.edit-btn {
+  background-color: #f39c12; /* Jaune */
+  color: white;
+  border: none;
+}
+
+.delete-btn {
+  background-color: #e74c3c; /* Rouge */
+  color: white;
+  border: none;
+}
+
+/* Survol des boutons */
+.edit-btn:hover {
+  background-color: #f1c40f;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* --------------------- Responsivité --------------------- */
+@media (max-width: 600px) {
+  .submit-btn {
+    font-size: 0.9rem;
+  }
+
+  p-dialog {
+    width: 90%;
+  }
+
+  .edit-btn, .delete-btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .task-form {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  input, p-checkbox {
+    width: 100%;
+  }
+}
+
+/* --------------------- Validation des erreurs --------------------- */
+.error {
+  color: #e74c3c; /* Rouge pour les messages d'erreur */
+  font-size: 12px;
+}
+
+small {
+  font-size: 12px;
+}
+
+/* --------------------- Autres ajustements de style --------------------- */
+.dialog-content {
+  padding: 20px;
+}
+
+/* Conteneur principal du formulaire */
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligner le bouton à droite */
+}
+
+/* --------------------- Texte à côté du Checkbox (Terminée / En cours) --------------------- */
+.checkbox-container .status-text {
+  margin-left: 10px;
+  font-weight: bold;
+  color: #333;
+}
+

@@ -1,0 +1,81 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="container">
+  <!-- Controls for adding task and filtering tasks by status -->
+  <div class="controls">
+    <!-- Button to trigger the task creation dialog -->
+    <button pButton type="button" label="Add Task" (click)="showDialog()"></button>
+
+    <!-- Dropdown to filter tasks by status -->
+    <p-dropdown 
+      [options]="statusOptions" 
+      [(ngModel)]="selectedStatus" 
+      placeholder="Filter by status"
+      (onChange)="filterByStatus()">
+    </p-dropdown>
+  </div>
+
+  <!-- Task Table -->
+  <p-table [value]="tasks" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+    <!-- Table Header with sortable columns -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+        <th>Status</th>
+        <th pSortableColumn="createdAt">Creation Date <p-sortIcon field="createdAt"></p-sortIcon></th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    
+    <!-- Table Body with task data -->
+    <ng-template pTemplate="body" let-task>
+      <tr>
+        <td>{{ task.name }}</td>
+        <td>
+          <!-- Checkbox to toggle task completion -->
+          <p-checkbox [binary]="true" [ngModel]="task.completed" (onChange)="toggleCompletion(task)"></p-checkbox>
+
+          <!-- Display status based on task completion -->
+          {{ task.completed ? 'Completed' : 'In Progress' }}
+        </td>
+        <td>{{ task.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <!-- Edit button -->
+          <button pButton type="button" class="edit-btn" icon="pi pi-pencil" (click)="editTask(task)"></button>
+          <!-- Delete button -->
+          <button pButton type="button" class="delete-btn" icon="pi pi-trash" (click)="confirmDelete(task)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Dialog for adding a task -->
+  <p-dialog header="Add Task" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '400px'}">
+    <form (ngSubmit)="saveTask()" class="task-form">
+      <!-- Task Name Input Field -->
+      <label for="name">Task Name:</label>
+      <input id="name" [(ngModel)]="task.name" name="name" required #taskName="ngModel"/>
+      
+      <!-- Validation message for the task name -->
+      <div *ngIf="taskName.invalid && taskName.touched" class="error">
+        <small *ngIf="taskName.errors?.['required']">Name is required.</small>
+      </div>
+      
+      <!-- Task Status Checkbox -->
+      <div class="checkbox-container">
+        <label for="completed">Status:</label>
+        <p-checkbox [(ngModel)]="task.completed" name="completed" [binary]="true"></p-checkbox>
+
+        <!-- Display the status text based on completion -->
+        <span *ngIf="task.completed">Completed</span>
+        <span *ngIf="!task.completed">In Progress</span>
+      </div>
+
+      <!-- Submit button for saving the task -->
+      <div class="button-container">
+        <button type="submit" pButton label="Save" [disabled]="taskName.invalid"></button>
+      </div>
+    </form>
+  </p-dialog>
+</div>
