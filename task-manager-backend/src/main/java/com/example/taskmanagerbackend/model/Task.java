@@ -46,4 +46,7 @@ public class Task {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+    public void setId(long l) {
+    }
 }
