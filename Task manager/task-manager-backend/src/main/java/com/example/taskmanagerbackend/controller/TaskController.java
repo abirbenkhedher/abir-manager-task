@@ -26,7 +26,7 @@ public class TaskController {
     private TaskService taskService;
 
     @Autowired
-    private TaskRepository taskRepository;  // Inject TaskRepository for direct data access (if needed)
+    private TaskRepository taskRepository;
 
     // Method to get all tasks with optional filters, sorting, and pagination
     @GetMapping
